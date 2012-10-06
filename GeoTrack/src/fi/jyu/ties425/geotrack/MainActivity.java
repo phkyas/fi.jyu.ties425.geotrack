@@ -17,11 +17,11 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 	
 	LocationDatabaseHandler ldbh = new LocationDatabaseHandler(this);
+	Date time = new Date();
 	Button btn_showCurrentLocation;
 	Button btn_showAllLocations;
 	Button btn_showHistory;
 	TextView tv_location;
-	Date time = new Date();
 	LocationManager locationManager;
 	Location lastKnown;
 	String provider;
@@ -31,30 +31,41 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //get UI elements
         btn_showCurrentLocation = (Button)findViewById(R.id.btn_showCurrentLocation);
         btn_showAllLocations = (Button)findViewById(R.id.btn_showAllLocations);
         btn_showHistory = (Button)findViewById(R.id.btn_showHistory);
     	tv_location = (TextView)findViewById(R.id.tv_location);
-        
+        //location
         provider = defineLocationSettings();
-        //locationManager.requestLocationUpdates(provider, minTime, minDistance, listener)
-        locationManager.requestLocationUpdates(provider, 30000, 100, locationListener);
-        
+        locationManager.requestLocationUpdates(provider, 30000, 100, locationListener); //locationManager.requestLocationUpdates(provider, minTime, minDistance, listener)
         setLocationToUi(lastKnown);
-        
+        //set UI buttons
         if (ldbh.isEmpty()){
         	dbe = true;
         } else {
         	dbe = false;
         }
-        
         setButtons(dbe);
+        
+        //button listener
         
         btn_showCurrentLocation.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				startActivity(new Intent(MainActivity.this,MapsActivity.class));
+				startActivity(new Intent(MainActivity.this,MapsActivity.class).putExtra("latitude", lastKnown.getLatitude()).putExtra("longitude", lastKnown.getLongitude()));
+			}
+		});
+        
+        btn_showAllLocations.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(MainActivity.this,MapsActivity.class).putExtra("showAllLocations", true));
+			}
+		});
+        
+        //to do
+        btn_showHistory.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				//startActivity(new Intent(MainActivity.this,***.class));
 			}
 		});
       
@@ -62,10 +73,9 @@ public class MainActivity extends Activity {
 
 	LocationListener locationListener = new LocationListener() {
 		public void onLocationChanged(Location location) {
-			//getCurrentLocationAddress(location);
+			lastKnown = location;
 			ldbh.insertLocation(time.getTime(), location.getLatitude(), location.getLongitude());
 			setLocationToUi(location);
-			
 			if(dbe){ //set to TRUE if we clear the DB
 				dbe = false;
 				setButtons(dbe);
@@ -103,9 +113,10 @@ public class MainActivity extends Activity {
 	
 	private void setLocationToUi(Location location){
 		if (location != null) {
-			tv_location.setText(location.toString());
+			tv_location.setText(location.toString()); //rework 
 			btn_showCurrentLocation.setEnabled(true);
 		} else {
+			tv_location.setText(R.string.tv_location);
 			btn_showCurrentLocation.setEnabled(false);
 		}
 	}
@@ -120,10 +131,7 @@ public class MainActivity extends Activity {
         }
 	}
 	
-	
-	
-	
-	
+	//rework menu
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);

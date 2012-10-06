@@ -11,6 +11,6 @@
     <string name="btn_showHistory">Show history of locations</string>
     <string name="tv_yourLocation">Your location:</string>
     <string name="tv_location">No data available</string>
-    <string name="title_activity_show_single_location">Location on Map</string>
+    <string name="title_activity_show_single_location">Map with Location(s)</string>
 
 </resources>
