@@ -1,9 +1,10 @@
 <resources>
 
+    <!-- General -->
     <string name="app_name">GeoTrack</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
     <string name="title_activity_main">GeoTrack</string>
+    <string name="title_activity_history">Location History</string>
+    <string name="title_activity_maps">Map with Location(s)</string>
 
     <!-- Main Activity -->
     <string name="btn_showCurrentLocation">Current location on map</string>
@@ -11,10 +12,13 @@
     <string name="btn_showHistory">Show history of locations</string>
     <string name="tv_yourLocation">Your location:</string>
     <string name="tv_default">./.</string>
-    <string name="title_activity_show_single_location">Map with Location(s)</string>
-    
     <string name="tv_latitude_heading">Latitude:</string>
     <string name="tv_longitude_heading">Longitude</string>
     <string name="tv_timestamp_heading">Timestamp:</string>
+    <string name="contentDescription">image</string>
+
+    <!-- Menu -->
+    <string name="menu_about">About GeoTrack</string>
+    <string name="menu_clearDatabase">Delete Location History</string>
 
 </resources>
