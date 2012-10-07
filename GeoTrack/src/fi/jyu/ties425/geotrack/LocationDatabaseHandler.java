@@ -87,6 +87,8 @@ public class LocationDatabaseHandler extends SQLiteOpenHelper {
 		db.close();
 		//return topEntries;
 		return topEntries;
+		
+		
 	}
 	
 //	public GeoPoint[] 
