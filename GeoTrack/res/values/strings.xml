@@ -10,7 +10,11 @@
     <string name="btn_showAllLocations">Show all locations on map</string>
     <string name="btn_showHistory">Show history of locations</string>
     <string name="tv_yourLocation">Your location:</string>
-    <string name="tv_location">No data available</string>
+    <string name="tv_default">./.</string>
     <string name="title_activity_show_single_location">Map with Location(s)</string>
+    
+    <string name="tv_latitude_heading">Latitude:</string>
+    <string name="tv_longitude_heading">Longitude</string>
+    <string name="tv_timestamp_heading">Timestamp:</string>
 
 </resources>

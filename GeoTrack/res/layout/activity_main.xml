@@ -1,51 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mainLayout"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
-	android:paddingRight="16dp"
-	android:paddingTop="16dp" >
-    
-    <TextView
-        android:id="@+id/tv_yourLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/tv_yourLocation" />
-    
-    <TextView
-        android:id="@+id/tv_location"
-        android:layout_below="@+id/tv_yourLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/tv_location" />
-    
-    <Button
-        android:id="@+id/btn_showCurrentLocation"
-        android:layout_below="@+id/tv_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/btn_showCurrentLocation"/>
+    android:paddingRight="16dp"
+    android:paddingTop="16dp" >
 
-    <Button
-        android:id="@+id/btn_showAllLocations"
-        android:layout_below="@+id/btn_showCurrentLocation"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/btn_showAllLocations" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btn_showHistory"
-        android:layout_below="@+id/btn_showAllLocations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/btn_showHistory" />
+        <TextView
+            android:id="@+id/tv_yourLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_yourLocation"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-  
+        <TextView
+            android:id="@+id/tv_latitude_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_latitude_heading" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_latitude_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_default" />
+
+        <TextView
+            android:id="@+id/tv_longitude_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_longitude_heading" />
+
+        <TextView
+            android:id="@+id/tv_longitude_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_default" />
+
+        <TextView
+            android:id="@+id/tv_timestamp_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_timestamp_heading" />
+
+        <TextView
+            android:id="@+id/tv_timestamp_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_default" />
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/btn_showCurrentLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/btn_showCurrentLocation" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/btn_showAllLocations"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/btn_showAllLocations" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/btn_showHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/btn_showHistory" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</ScrollView>

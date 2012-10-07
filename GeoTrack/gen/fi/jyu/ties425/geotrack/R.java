@@ -16,13 +16,18 @@ public final class R {
         public static final int pin_gold=0x7f020002;
     }
     public static final class id {
-        public static final int btn_showAllLocations=0x7f070004;
-        public static final int btn_showCurrentLocation=0x7f070003;
-        public static final int btn_showHistory=0x7f070005;
+        public static final int btn_showAllLocations=0x7f070009;
+        public static final int btn_showCurrentLocation=0x7f070008;
+        public static final int btn_showHistory=0x7f07000a;
         public static final int mainLayout=0x7f070000;
-        public static final int menu_settings=0x7f070007;
-        public static final int myMapView=0x7f070006;
-        public static final int tv_location=0x7f070002;
+        public static final int menu_settings=0x7f07000c;
+        public static final int myMapView=0x7f07000b;
+        public static final int tv_latitude_data=0x7f070003;
+        public static final int tv_latitude_heading=0x7f070002;
+        public static final int tv_longitude_data=0x7f070005;
+        public static final int tv_longitude_heading=0x7f070004;
+        public static final int tv_timestamp_data=0x7f070007;
+        public static final int tv_timestamp_heading=0x7f070006;
         public static final int tv_yourLocation=0x7f070001;
     }
     public static final class layout {
@@ -44,7 +49,10 @@ public final class R {
         public static final int menu_settings=0x7f040002;
         public static final int title_activity_main=0x7f040003;
         public static final int title_activity_show_single_location=0x7f040009;
-        public static final int tv_location=0x7f040008;
+        public static final int tv_default=0x7f040008;
+        public static final int tv_latitude_heading=0x7f04000a;
+        public static final int tv_longitude_heading=0x7f04000b;
+        public static final int tv_timestamp_heading=0x7f04000c;
         public static final int tv_yourLocation=0x7f040007;
     }
     public static final class style {
