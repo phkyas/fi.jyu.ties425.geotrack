@@ -1,5 +1,7 @@
 package fi.jyu.ties425.geotrack;
 
+import com.google.android.maps.GeoPoint;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -55,6 +57,40 @@ public class LocationDatabaseHandler extends SQLiteOpenHelper {
 			return false;
 		}
 	}
+	
+			//GeoPoint
+	public double[] GetTopEntries(){
+		
+		SQLiteDatabase db = this.getReadableDatabase();
+		double[] topEntries=null;
+		//GeoPoint points[]=null;
+		int apu1, apu2;
+		Cursor cursor = db.query(TABLE_NAME, new String[] {"_latitude","_longitude"},null, null, null, null, "_timestamp DESC", "50");
+		if(cursor !=null){
+			//int numberOfEntries = cursor.getCount();
+			if (cursor.getCount() != 0) {
+				cursor.moveToFirst();
+			//	points = new GeoPoint[cursor.getCount()*2];
+				topEntries = new double [cursor.getCount()*2];
+				for (int i=0; i<cursor.getCount()*2;i +=2){
+			//		apu1 = (int) (Integer.parseInt(cursor.getString(0))* 1E6); Throws a number format exception 
+			//		apu2 = (int) (Integer.parseInt(cursor.getString(1))* 1E6);
+			//		points[i]= new GeoPoint (apu1,apu2);
+					topEntries[i] = Double.parseDouble(cursor.getString(0))* 1e6;
+					topEntries[i+1]= Double.parseDouble(cursor.getString(1))*1e6;
+					cursor.moveToNext();
+				}
+			}
+			
+		}
+		Log.i("LocationDatabasehandler - getTopEntries", "Entries: "+ topEntries.length + "Latitude: "+ topEntries[0] + " Longitude: " + topEntries[1]);
+		db.close();
+		//return topEntries;
+		return topEntries;
+		
+		
+	}
+	
 //	public GeoPoint[] 
 //	public String[] getTopThree(){
 //		SQLiteDatabase db = this.getReadableDatabase();

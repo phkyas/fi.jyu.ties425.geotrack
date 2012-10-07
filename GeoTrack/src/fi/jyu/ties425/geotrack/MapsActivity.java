@@ -23,6 +23,8 @@ public class MapsActivity extends MapActivity {
 	private List<Overlay> mapOverlays;
 	private Drawable drawable;
 	private MapsActivityItemizedOverlay itemizedoverlay;
+	LocationDatabaseHandler ldbh = new LocationDatabaseHandler(this);
+
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,10 +79,15 @@ public class MapsActivity extends MapActivity {
 		protected Void doInBackground(GeoPoint... slocation) {
 	        
 	        if (slocation.length == 0) {
+	        	
+	        	//GeoPoint[] temp2 = (GeoPoint[]) ldbh.GetTopEntries(); This should work
+	        	//locations = temp2;
 	        	//showAllLocation
 	        	// -> DB Query
+	        	
 	        	GeoPoint[] tmp = {new GeoPoint(60169845,24938551), new GeoPoint(59328930,18064910), new GeoPoint(62244747,25747218)};
 	        	locations = tmp;
+	        	
 	        	//remove these two lines
 	        	
 	        } else {
