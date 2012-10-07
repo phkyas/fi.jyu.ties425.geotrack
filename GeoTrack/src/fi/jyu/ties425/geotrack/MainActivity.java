@@ -95,6 +95,7 @@ public class MainActivity extends Activity {
 			lastKnown = location;
 			lastKnown.setTime(time.getTime());
 			ldbh.insertLocation(time.getTime(), location.getLatitude(), location.getLongitude());
+			ldbh.GetTopEntries();
 			setLocation(location);
 			if(dbe){ //set to TRUE if we clear the DB
 				dbe = false;
