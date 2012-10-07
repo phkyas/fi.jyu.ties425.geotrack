@@ -1,6 +1,5 @@
 package fi.jyu.ties425.geotrack;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import android.location.Criteria;
@@ -61,7 +60,7 @@ public class MainActivity extends Activity {
         //to do
         btn_showHistory.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				//startActivity(new Intent(MainActivity.this,***.class));
+				startActivity(new Intent(MainActivity.this,HistoryActivity.class));
 			}
 		});
       
@@ -135,9 +134,7 @@ public class MainActivity extends Activity {
 		if (location != null) {
 			tv_latitude.setText(Double.toString(location.getLatitude()));
 			tv_longitude.setText(Double.toString(location.getLongitude()));
-			//tv_timestamp.setText(new Timestamp(location.getTime()).toString());
-					//22 Jun 1999 13:02:00 GMT
-			tv_timestamp.setText(sdf.format(new Timestamp(location.getTime())));
+			tv_timestamp.setText(sdf.format(location.getTime()));
 			btn_showCurrentLocation.setEnabled(true);
 		} else {
 			tv_latitude.setText(R.string.tv_default);
