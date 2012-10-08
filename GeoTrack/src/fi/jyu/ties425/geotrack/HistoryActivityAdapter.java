@@ -14,6 +14,7 @@ public class HistoryActivityAdapter extends BaseAdapter {
 	
 	private GeoPoint[] locations;
 	private String[] time;
+	private String locationAsString;
 	private static LayoutInflater inflater=null;
 	
 	public HistoryActivityAdapter(Activity activity, GeoPoint[] locations, String[] time){
@@ -43,7 +44,9 @@ public class HistoryActivityAdapter extends BaseAdapter {
 		TextView location = (TextView)vi.findViewById(R.id.tv_location_list);
 		TextView timestamp = (TextView)vi.findViewById(R.id.tv_timestamp_list);
 		
-		location.setText(locations[position].toString());
+		locationAsString = locations[position].getLatitudeE6()/1e6 + ", " + locations[position].getLongitudeE6()/1e6;
+		
+		location.setText(locationAsString);
 		timestamp.setText(time[position]);
 		
 		return vi;

@@ -145,10 +145,8 @@ public class MainActivity extends Activity {
 
 	private void setLocation(Location location) {
 		if (location != null) {
-			tv_latitude
-					.setText(Integer.toString((int) (location.getLatitude() * 1e6)));
-			tv_longitude.setText(Integer.toString((int) (location
-					.getLongitude() * 1e6)));
+			tv_latitude.setText(Double.toString(location.getLatitude()));
+			tv_longitude.setText(Double.toString(location.getLongitude()));
 			tv_timestamp.setText(sdf.format(location.getTime()));
 			btn_showCurrentLocation.setEnabled(true);
 		} else {
