@@ -5,6 +5,7 @@
     <string name="title_activity_main">GeoTrack</string>
     <string name="title_activity_history">Location History</string>
     <string name="title_activity_maps">Map with Location(s)</string>
+    <string name="splash">Splash Image</string>
 
     <!-- Main Activity -->
     <string name="btn_showCurrentLocation">Current location on map</string>

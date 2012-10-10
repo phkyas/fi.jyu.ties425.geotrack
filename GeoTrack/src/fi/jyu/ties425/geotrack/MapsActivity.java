@@ -88,7 +88,7 @@ public class MapsActivity extends MapActivity {
 	        }
 	        
 	        mapController.setCenter(locations[0]);
-		    mapController.setZoom(5);
+		    mapController.setZoom(10);
 		    mapOverlays.add(itemizedoverlay);
 			return null;
 		}

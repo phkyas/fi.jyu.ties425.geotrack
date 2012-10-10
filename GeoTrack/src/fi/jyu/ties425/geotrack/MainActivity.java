@@ -1,5 +1,11 @@
 package fi.jyu.ties425.geotrack;
 
+/*
+ * to do:
+ * - splash screen
+ * - fragments
+ */
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import android.location.Criteria;
