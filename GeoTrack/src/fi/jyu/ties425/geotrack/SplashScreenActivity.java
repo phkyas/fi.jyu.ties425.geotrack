@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
-import android.view.Window;
-import android.view.WindowManager;
+/*import android.view.WindowManager;*/
 
 public class SplashScreenActivity extends Activity {
 
@@ -14,9 +13,8 @@ public class SplashScreenActivity extends Activity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE); // Removes title bar
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN); // Removes notification bar
+		/*this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN); // Removes notification bar*/
 		setContentView(R.layout.activity_splash_screen);
 
 		splashThread = new Thread() {
