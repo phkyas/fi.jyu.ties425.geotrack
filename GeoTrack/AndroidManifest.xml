@@ -38,9 +38,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HistoryActivity"
+            android:name=".NewFragmentActivity"
             android:exported="false"
-            android:label="@string/title_activity_history" >
+            android:label="@string/title_fragment" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

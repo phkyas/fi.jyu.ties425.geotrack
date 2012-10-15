@@ -35,8 +35,8 @@ public class LocationDatabaseHandler extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put("_timestamp", time);
-		values.put("_latitude", latitude*1e6);
-		values.put("_longitude", longitude*1e6);
+		values.put("_latitude", latitude * 1e6);
+		values.put("_longitude", longitude * 1e6);
 		db.insert(TABLE_NAME, null, values);
 		db.close();
 	}
@@ -55,8 +55,10 @@ public class LocationDatabaseHandler extends SQLiteOpenHelper {
 		Cursor cursor = db.query(TABLE_NAME, new String[] { "_timestamp" },
 				null, null, null, null, null);
 		if (cursor.getCount() == 0) {
+			db.close();
 			return true;
 		} else {
+			db.close();
 			return false;
 		}
 	}
@@ -70,47 +72,47 @@ public class LocationDatabaseHandler extends SQLiteOpenHelper {
 		Cursor cursor = db
 				.query(TABLE_NAME, new String[] { "_latitude", "_longitude" },
 						null, null, null, null, "_timestamp DESC", "50");
-		
+
 		if (cursor != null) {
 			numberOfLocations = cursor.getCount();
 			if (numberOfLocations != 0) {
 				cursor.moveToFirst();
 				locations = new GeoPoint[numberOfLocations];
-				
-				for (int i = 0; i < numberOfLocations;i++){
-					locations[i] = new GeoPoint(cursor.getInt(0),cursor.getInt(1));
+
+				for (int i = 0; i < numberOfLocations; i++) {
+					locations[i] = new GeoPoint(cursor.getInt(0),
+							cursor.getInt(1));
 					cursor.moveToNext();
 				}
 			}
 		}
-		
+
 		db.close();
 		return locations;
 	}
-	
+
 	public String[] getTop50Timestamps() {
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		String timestamps[] = null;
 		int numberOfTimestamps;
 
-		Cursor cursor = db
-				.query(TABLE_NAME, new String[] { "_timestamp" },
-						null, null, null, null, "_timestamp DESC", "50");
-		
+		Cursor cursor = db.query(TABLE_NAME, new String[] { "_timestamp" },
+				null, null, null, null, "_timestamp DESC", "50");
+
 		if (cursor != null) {
 			numberOfTimestamps = cursor.getCount();
 			if (numberOfTimestamps != 0) {
 				cursor.moveToFirst();
 				timestamps = new String[numberOfTimestamps];
-				
-				for (int i = 0; i < numberOfTimestamps;i++){
+
+				for (int i = 0; i < numberOfTimestamps; i++) {
 					timestamps[i] = cursor.getString(0);
 					cursor.moveToNext();
 				}
 			}
 		}
-		
+
 		db.close();
 		return timestamps;
 	}

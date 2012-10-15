@@ -17,41 +17,38 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 public class MapsActivity extends MapActivity {
-	
+
 	private LocationDatabaseHandler ldbh = new LocationDatabaseHandler(this);
 	private MapView mapView;
 	private MapController mapController;
 	private List<Overlay> mapOverlays;
 	private Drawable drawable;
 	private MapsActivityItemizedOverlay itemizedoverlay;
-	
+
 	@Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-        
-        mapView = (MapView)findViewById(R.id.myMapView);
-        mapController = mapView.getController();
-        mapView.setBuiltInZoomControls(true);
-        mapOverlays = mapView.getOverlays();
-		
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_maps);
+
+		mapView = (MapView) findViewById(R.id.myMapView);
+		mapController = mapView.getController();
+		mapView.setBuiltInZoomControls(true);
+		mapOverlays = mapView.getOverlays();
+
 		drawable = getResources().getDrawable(R.drawable.pin_gold);
-        itemizedoverlay = new MapsActivityItemizedOverlay(drawable, this);
-        
-        Intent intent = getIntent();
-        LoadMap lm = new LoadMap(this);
+		itemizedoverlay = new MapsActivityItemizedOverlay(drawable, this);
+
+		Intent intent = getIntent();
+		LoadMap lm = new LoadMap(this);
 		if (intent.getBooleanExtra("showAllLocations", false)) {
 			lm.execute();
 		} else {
-			lm.execute(
-				new GeoPoint(
-					(int) (intent.getDoubleExtra("latitude", 0)*1e6),
-					(int) (intent.getDoubleExtra("longitude", 0)*1e6)
-				)
-			);
+			lm.execute(new GeoPoint(
+					(int) (intent.getDoubleExtra("latitude", 0) * 1e6),
+					(int) (intent.getDoubleExtra("longitude", 0) * 1e6)));
 		}
-        
-    }
+
+	}
 
 	@Override
 	protected boolean isRouteDisplayed() {
@@ -59,10 +56,10 @@ public class MapsActivity extends MapActivity {
 	}
 
 	private class LoadMap extends AsyncTask<GeoPoint, Void, Void> {
-		
+
 		ProgressDialog dialog;
 		GeoPoint[] locations;
-		
+
 		public LoadMap(Context context) {
 			dialog = new ProgressDialog(context);
 		}
@@ -76,26 +73,27 @@ public class MapsActivity extends MapActivity {
 
 		@Override
 		protected Void doInBackground(GeoPoint... slocation) {
-	        
-	        if (slocation.length == 0) {
-	        	locations = ldbh.getTop50Locations();
-	        } else {
-	        	locations = slocation;
-	        }
-	        
-	        for (GeoPoint gp : locations) {
-	        	itemizedoverlay.addOverlay(new OverlayItem(gp, "Location Data:", gp.toString()));
-	        }
-	        
-	        mapController.setCenter(locations[0]);
-		    mapController.setZoom(10);
-		    mapOverlays.add(itemizedoverlay);
+
+			if (slocation.length == 0) {
+				locations = ldbh.getTop50Locations();
+			} else {
+				locations = slocation;
+			}
+
+			for (GeoPoint gp : locations) {
+				itemizedoverlay.addOverlay(new OverlayItem(gp,
+						"Location Data:", gp.toString()));
+			}
+
+			mapController.setCenter(locations[0]);
+			mapController.setZoom(10);
+			mapOverlays.add(itemizedoverlay);
 			return null;
 		}
-		
+
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			if (dialog.isShowing()){
+			if (dialog.isShowing()) {
 				dialog.dismiss();
 			}
 		}

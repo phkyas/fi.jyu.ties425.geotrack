@@ -13,11 +13,11 @@ public class MapsActivityItemizedOverlay extends ItemizedOverlay {
 
 	private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
 	Context mContext;
-	
+
 	public MapsActivityItemizedOverlay(Drawable defaultMarker) {
 		super(boundCenterBottom(defaultMarker));
 	}
-	
+
 	public MapsActivityItemizedOverlay(Drawable defaultMarker, Context context) {
 		super(boundCenterBottom(defaultMarker));
 		mContext = context;
@@ -42,10 +42,10 @@ public class MapsActivityItemizedOverlay extends ItemizedOverlay {
 	public int size() {
 		return mOverlays.size();
 	}
-	
-	public void addOverlay(OverlayItem overlay){
+
+	public void addOverlay(OverlayItem overlay) {
 		mOverlays.add(overlay);
 		populate();
 	}
-	
+
 }

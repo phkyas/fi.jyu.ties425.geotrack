@@ -1,11 +1,5 @@
 package fi.jyu.ties425.geotrack;
 
-/*
- * to do:
- * - splash screen
- * - fragments
- */
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import android.location.Criteria;
@@ -70,11 +64,10 @@ public class MainActivity extends Activity {
 						.putExtra("showAllLocations", true));
 			}
 		});
-		// to do
 		btn_showHistory.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				startActivity(new Intent(MainActivity.this,
-						HistoryActivity.class));
+						NewFragmentActivity.class));
 			}
 		});
 
@@ -188,23 +181,29 @@ public class MainActivity extends Activity {
 			break;
 		case R.id.menu_clearDatabase:
 			new AlertDialog.Builder(this)
-			.setTitle("Attention - Delete Location History")
-			.setMessage("Are you sure, that you want to delete the whole location history?")
-			.setCancelable(false)
-			.setPositiveButton("Delete History", new DialogInterface.OnClickListener() {
-        		public void onClick(DialogInterface dialog, int id) {
-        			ldbh.clearDatabase();
-        			dbe = true;
-        			setLocation(null);
-        			setButtons(dbe);
-        			Toast.makeText(MainActivity.this, "Location History Deleted", Toast.LENGTH_SHORT).show();
-        		}
- 	   		})
- 	   		.setNegativeButton("Abort", new DialogInterface.OnClickListener() {
-	    		public void onClick(DialogInterface dialog, int id) {
-	    			}
- 	   			})
-			.show();
+					.setTitle("Attention - Delete Location History")
+					.setMessage(
+							"Are you sure, that you want to delete the whole location history?")
+					.setCancelable(false)
+					.setPositiveButton("Delete History",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+									ldbh.clearDatabase();
+									dbe = true;
+									setLocation(null);
+									setButtons(dbe);
+									Toast.makeText(MainActivity.this,
+											"Location History Deleted",
+											Toast.LENGTH_SHORT).show();
+								}
+							})
+					.setNegativeButton("Abort",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+								}
+							}).show();
 			break;
 		default:
 			break;
