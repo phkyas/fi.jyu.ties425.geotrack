@@ -12,7 +12,7 @@ public class NewFragmentActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.history_maps);
 
-		// portrait
+		// normal screen
 		if (findViewById(R.id.fragment_container) != null) {
 			if (savedInstanceState != null) {
 				return;
@@ -31,11 +31,11 @@ public class NewFragmentActivity extends FragmentActivity implements
 				.findFragmentById(R.id.maps_fragment);
 
 		if (mapsFrag != null) {
-			// landscape
+			// large screen
 			mapsFrag.updateMapsView(latitude, longitude);
 
 		} else {
-			// portrait
+			// small screen
 			MapsFragment newFragment = new MapsFragment();
 			Bundle args = new Bundle();
 			args.putDouble(MapsFragment.LATITUDE, latitude);
