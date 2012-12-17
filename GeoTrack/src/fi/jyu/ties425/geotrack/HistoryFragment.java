@@ -1,6 +1,5 @@
 package fi.jyu.ties425.geotrack;
 
-import com.google.android.maps.GeoPoint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,10 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
+import com.google.android.maps.GeoPoint;
+
+/**
+ * class to show a list of locations
+ * 
+ * @author Philipp Kyas and Jouni Laitinen
+ * @version 1.0
+ */
 public class HistoryFragment extends Fragment {
+	/*
+	 * define necessary variables
+	 */
 	OnLocationSelectedListener mCallback;
 
 	private LocationDatabaseHandler ldbh;
@@ -20,10 +30,18 @@ public class HistoryFragment extends Fragment {
 	private GeoPoint[] locations;
 	private String[] time;
 
+	/*
+	 * interface for location selected
+	 */
 	public interface OnLocationSelectedListener {
 		public void onLocationSelected(double latitude, double longitude);
 	}
 
+	/*
+	 * implement the interface OnLocationSelectedListener
+	 * 
+	 * @see android.support.v4.app.Fragment#onAttach(android.app.Activity)
+	 */
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -31,10 +49,17 @@ public class HistoryFragment extends Fragment {
 			mCallback = (OnLocationSelectedListener) activity;
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
-					+ " must implement OnHeadlineSelectedListener");
+					+ " must implement OnLocationSelectedListener");
 		}
 	}
 
+	/*
+	 * get the locations-db and retrieve the corresponding locations (incl.
+	 * time) which should be shown, afterwards, set the list adapter with this
+	 * data
+	 * 
+	 * @see android.support.v4.app.Fragment#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,6 +72,13 @@ public class HistoryFragment extends Fragment {
 		adapter = new HistoryActivityAdapter(getActivity(), locations, time);
 	}
 
+	/*
+	 * selected the 'layout' which will be extended later on
+	 * 
+	 * @see
+	 * android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater,
+	 * android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -54,6 +86,11 @@ public class HistoryFragment extends Fragment {
 
 	}
 
+	/*
+	 * load all the items (location + time) into the above selected layout
+	 * 
+	 * @see android.support.v4.app.Fragment#onActivityCreated(android.os.Bundle)
+	 */
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);

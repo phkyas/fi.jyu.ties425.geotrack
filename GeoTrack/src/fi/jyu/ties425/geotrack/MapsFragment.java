@@ -9,8 +9,18 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+/**
+ * class to show the locations in a two frame layout within a 'webview', because
+ * it is not possible to use the native google maps api for android in fragments
+ * 
+ * @author Philipp Kyas and Jouni Laitinen
+ * @version 1.0
+ */
 @SuppressLint("SetJavaScriptEnabled")
 public class MapsFragment extends Fragment {
+	/*
+	 * define necessary variables
+	 */
 	private static final String MAP = "file:///android_asset/theMap.html";
 	private WebView webView;
 
@@ -19,6 +29,13 @@ public class MapsFragment extends Fragment {
 	double latitude = 555;
 	double longitude = 555;
 
+	/*
+	 * get the current location, if saved
+	 * 
+	 * @see
+	 * android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater,
+	 * android.view.ViewGroup, android.os.Bundle)
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -30,6 +47,11 @@ public class MapsFragment extends Fragment {
 		return inflater.inflate(R.layout.webview_maps, container, false);
 	}
 
+	/*
+	 * update the map
+	 * 
+	 * @see android.support.v4.app.Fragment#onStart()
+	 */
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -44,6 +66,9 @@ public class MapsFragment extends Fragment {
 
 	}
 
+	/*
+	 * load the google maps embedded
+	 */
 	public void updateMapsView(double latitude, double longitude) {
 
 		this.latitude = latitude;
@@ -58,6 +83,12 @@ public class MapsFragment extends Fragment {
 
 	}
 
+	/*
+	 * save the current location
+	 * 
+	 * @see
+	 * android.support.v4.app.Fragment#onSaveInstanceState(android.os.Bundle)
+	 */
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -65,6 +96,10 @@ public class MapsFragment extends Fragment {
 		outState.putDouble(LONGITUDE, longitude);
 	}
 
+	/*
+	 * JavaScript bridge to enable the transfer of the location(s) from this
+	 * class to the webview
+	 */
 	private class JavaScriptInterface {
 		@SuppressWarnings("unused")
 		public double getLatitude() {

@@ -2,16 +2,17 @@ package fi.jyu.ties425.geotrack;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,8 +20,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * main class which starts and stops the location service (incl. DB) as well as
+ * renders the start view
+ * 
+ * @author Philipp Kyas and Jouni Laitinen
+ * @version 1.0
+ */
 public class MainActivity extends Activity {
 
+	/*
+	 * definition of the necessary variables
+	 */
 	LocationDatabaseHandler ldbh = new LocationDatabaseHandler(this);
 	SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy HH:mm:ss z");
 	Date time;
@@ -35,6 +46,12 @@ public class MainActivity extends Activity {
 	String provider;
 	Boolean dbe;
 
+	/*
+	 * render the layout at startup, activate the location service, and set
+	 * onClickListeners
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,11 +90,15 @@ public class MainActivity extends Activity {
 
 	}
 
+	/*
+	 * activate the location service again after returning from another view
+	 * 
+	 * @see android.app.Activity#onResume()
+	 */
 	@Override
 	protected void onResume() {
 		super.onResume();
 		// location
-
 		locationManager.requestLocationUpdates(provider, 30000, 100,
 				locationListener); // locationManager.requestLocationUpdates(provider,
 									// minTime, minDistance, listener)
@@ -91,12 +112,22 @@ public class MainActivity extends Activity {
 		setButtons(dbe);
 	}
 
+	/*
+	 * deactivate the location service when the current view is left
+	 * 
+	 * @see android.app.Activity#onPause()
+	 */
 	@Override
 	protected void onPause() {
 		super.onPause();
 		locationManager.removeUpdates(locationListener);
 	}
 
+	/*
+	 * create and define the location listener and define the actions to be done
+	 * at any location change event, here set a few variables and write the
+	 * location to the db
+	 */
 	LocationListener locationListener = new LocationListener() {
 		public void onLocationChanged(Location location) {
 			time = new Date();
@@ -124,6 +155,9 @@ public class MainActivity extends Activity {
 		}
 	};
 
+	/*
+	 * define the exact location settings, e.g. distance, accuracy,...
+	 */
 	private String defineLocationSettings() {
 		String context = Context.LOCATION_SERVICE;
 		locationManager = (LocationManager) getSystemService(context);
@@ -142,6 +176,9 @@ public class MainActivity extends Activity {
 		return provider;
 	}
 
+	/*
+	 * set the current location data to the view
+	 */
 	private void setLocation(Location location) {
 		if (location != null) {
 			tv_latitude.setText(Double.toString(location.getLatitude()));
@@ -156,6 +193,9 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	/*
+	 * activate and deactivate the buttons showAllLocations and showHistory
+	 */
 	private void setButtons(Boolean value) {
 		if (value) {
 			btn_showAllLocations.setEnabled(false);
@@ -166,12 +206,22 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	/*
+	 * create an options menu
+	 * 
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
 
+	/*
+	 * define the actions to be done when an options menu item is selected
+	 * 
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
